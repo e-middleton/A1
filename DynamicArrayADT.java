@@ -77,33 +77,33 @@ public interface DynamicArrayADT<T>{
      */
     public DynamicArrayADT<T> splitPrefix(int index);
 
-    // /**
-    //  * Method for removing multiple elements from, and including, a given index, up until
-    //  * just before a second index.
-    //  * @param start_index the starting index of the section being removed from the DynamicArray, this 
-    //  * element is also included in the section being removed.
-    //  * @param end_index the ending index of the section of elements being removed. The element stored 
-    //  * at this index is not removed from the original DynamicArray.
-    //  * @return the DynamicArray object without the removed elements.
-    //  */
-    // public DynamicArrayADT<T> delete(int start_index, int end_index);
+    /**
+     * Method for removing multiple elements from, and including, a given index, up until
+     * just before a second index.
+     * @param start_index the starting index of the section being removed from the DynamicArray, this 
+     * element is also included in the section being removed.
+     * @param end_index the ending index of the section of elements being removed. The element stored 
+     * at this index is not removed from the original DynamicArray.
+     * @return the DynamicArray object without the removed elements.
+     */
+    public DynamicArrayADT<T> delete(int start_index, int end_index);
 
-    // /**
-    //  * Method for taking a 'clipping' from a DynamicArray starting at a given index and ending at another.
-    //  * @param start_index the beginning of the extract, this index will be included in the resulting DynamicArray
-    //  * @param end_index the ending index of the extract, the element at this index is not included in the result.
-    //  * @return a new DynamicArray of the 'clipped' elements.
-    //  */
-    // public DynamicArrayADT<T> extract(int start_index, int end_index);
+    /**
+     * Method for taking a 'clipping' from a DynamicArray starting at a given index and ending at another.
+     * @param start_index the beginning of the extract, this index will be included in the resulting DynamicArray
+     * @param end_index the ending index of the extract, the element at this index is not included in the result.
+     * @return a new DynamicArray of the 'clipped' elements.
+     */
+    public DynamicArrayADT<T> extract(int start_index, int end_index);
 
-    // /**
-    //  * Method for inserting multiple elements of a DynamicArray into this DynamicArray at
-    //  * a specified index. 
-    //  * @param index the index where the new elements will be inserted.
-    //  * @param new_array the DynamicArray being inserted into this DynamicArray.
-    //  * @return a new object of type DynamicArray which is the old DynamicArray with the new 
-    //  * elements inserted.
-    //  */
-    // public DynamicArrayADT<T> insert(int index, DynamicArrayADT<T> new_array);
+    /**
+     * Method for inserting multiple elements of a DynamicArray into this DynamicArray at
+     * a specified index. 
+     * @param index the index where the new elements will be inserted.
+     * @param new_array the DynamicArray being inserted into this DynamicArray.
+     * @return a new object of type DynamicArray which is the old DynamicArray with the new 
+     * elements inserted.
+     */
+    public DynamicArrayADT<T> insert(int index, DynamicArrayADT<T> new_array);
 
 }

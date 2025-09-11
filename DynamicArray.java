@@ -177,6 +177,67 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
     }
 
+    /**
+     * Method for taking a 'clipping' from a DynamicArray starting at a given index and ending at another.
+     * @param start_index the beginning of the extract, this index will be included in the resulting DynamicArray
+     * @param end_index the ending index of the extract, the element at this index is not included in the result.
+     * @return a new DynamicArray of the 'clipped' elements.
+     */
+    public DynamicArray<T> extract(int start_index, int end_index){
+        DynamicArray<T> extract_arr = new DynamicArray<T>(end_index-start_index);
+
+        int m = 0; //counter for shorter arr
+        for(int i = 0; i<this.size; i++){
+            if(i<start_index){
+                continue; // do nothing to the elements before the clipping
+            }
+            if(i>=end_index){
+                continue; // do nothing to the elements after the clipping
+            } 
+            T item = this.values[i];
+            extract_arr.set(m, item);
+            m+=1;
+        }
+
+        return extract_arr;
+    }
+
+
+    /**
+     * Method for inserting multiple elements of a DynamicArray into this DynamicArray at
+     * a specified index. 
+     * @param index the index where the new elements will be inserted.
+     * @param new_array the DynamicArray being inserted into this DynamicArray.
+     * @return a new object of type DynamicArray which is the old DynamicArray with the new 
+     * elements inserted.
+     */
+    public DynamicArray<T> insert(int index, DynamicArrayADT<T> new_array){
+        DynamicArray<T> result_arr = new DynamicArray<T>(this.size+(new_array.size()));
+
+        int m = 0;
+        for(int i = 0; i<=this.size; i++){
+            if(i<index){                     // items before the inserted segment
+                T item = this.values[i];
+                result_arr.set(m, item);
+                m+=1;
+            }
+            if(i == index){
+                for(int j = 0; j<new_array.size(); j++){ // items within the inserted segment 
+                    T item = new_array.get(j);
+                    result_arr.set(m, item);
+                    m+=1;
+                }
+            }
+            if(i > index){                  // items after the insertion
+                T item = this.values[i-1]; // subtract one to compensate for skipping adding an original value last loop
+                result_arr.set(m, item);
+                m+=1;
+            }
+        }
+
+        return result_arr;
+    }
+
 public static void main(String[] args) {
     DynamicArray<Integer> test = new DynamicArray<Integer>(5);
 
@@ -209,17 +270,30 @@ public static void main(String[] args) {
     // System.out.println(test_four.get(2));
     // System.out.println(test_four.get(3));
 
-    test.set(0, 44);
-    test.set(1, 67);
-    test.set(2, 9999);
-    test.set(3, -1);
-    test.set(4, 2);
+    test.set(0, 0);
+    test.set(1, 1);
+    test.set(2, 2);
+    test.set(3, 3);
+    test.set(4, 4);
 
+    System.out.println("original");
     test.print();
 
+    System.out.println();
+    DynamicArray<Integer> extract = test.extract(1, 3);
+    System.out.println("extract");
+    extract.print();
+    System.out.println();
+    System.out.println("extract removed");
     DynamicArray<Integer> result = test.delete(1, 3);
     System.out.println();
     result.print();
+
+    System.out.println();
+    System.out.println("extract re-inserted");
+    DynamicArray<Integer> resultTwo = result.insert(1, extract);
+    resultTwo.print();
+
 }
 
 }
