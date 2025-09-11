@@ -1,12 +1,17 @@
 public class DynamicArray<T> implements DynamicArrayADT<T> {
 
-    int size;
-    T[] values;
+    private int size;
+    private T[] values;
 
     public DynamicArray(int size){
         this.size = size;
         this.values = allocate(size);
     }
+
+    /* TODO 
+     * It is also a good idea to write a copy constructor that takes a `DynamicArray` 
+     * as its input and makes a deep copy of it, allocating new array storage and looping to copy all the values.
+     */
 
     /**
      * private method to allocate space for an array of generic type
@@ -115,16 +120,70 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
 
         return suffix_array;
+    }
+
+    // /**
+    //  * Method for separating out the elements before, but not including, a specified index,
+    //  * and returning those elements as a separate DynamicArray.
+    //  * @param index the index where all the elements before it are separated out into the new DynamicArray.
+    //  * @return The new DynamicArray made up of the separated out elements.
+    //  */
+    public DynamicArray<T> splitPrefix(int index){
+        DynamicArray<T> prefixArray = new DynamicArray<T>(this.size);
+
+        for(int i = 0; i<index; i++){
+            T item = this.values[i];
+            prefixArray.set(i, item);
+        }
+
+        return prefixArray; 
 
     }
 
+    /**
+     * Method for removing multiple elements from, and including, a given index, up until
+     * just before a second index.
+     * @param start_index the starting index of the section being removed from the DynamicArray, this 
+     * element is also included in the section being removed.
+     * @param end_index the ending index of the section of elements being removed. The element stored 
+     * at this index is not removed from the original DynamicArray.
+     * @return the DynamicArray object without the removed elements.
+     */
+    public DynamicArray<T> delete(int start_index, int end_index){
+        DynamicArray<T> result_arr = new DynamicArray<T>(this.size - (end_index-start_index));
+
+        int m = 0; //separate iterating var for shorter result arr
+        for(int i = 0; i < this.size; i++){
+            if(i< start_index){
+                T item = this.values[i];
+                result_arr.set(m, item);
+                m+=1;
+            } 
+            if(i >= end_index){
+                T item = this.values[i];
+                result_arr.set(m, item);
+                m+=1;
+            } else{
+                // do nothing to skip elements being removed
+            }
+        }
+
+        return result_arr;
+    }
+
+    public void print(){
+        for(int i = 0; i < this.size; i++){
+            System.out.println(values[i]);
+        }
+    }
+
 public static void main(String[] args) {
-    DynamicArray<Integer> test = new DynamicArray<Integer>(2);
+    DynamicArray<Integer> test = new DynamicArray<Integer>(5);
 
     // tests for get, set, and add methods
-    test.set(0, 9);
-    test.set(1, 14);
-    test.add(1, 99999);
+    // test.set(0, 9);
+    // test.set(1, 14);
+    // test.add(1, 99999);
     // System.out.println(test.get(0));
     // System.out.println(test.get(1));
     // System.out.println(test.get(2));
@@ -136,19 +195,31 @@ public static void main(String[] args) {
     // System.out.println(test.get(1));
     // System.out.println(test.size());
 
-    DynamicArray<Integer> test_two = new DynamicArray<Integer>(2);
-    test_two.set(0, 55);
+    // DynamicArray<Integer> test_two = new DynamicArray<Integer>(2);
+    // test_two.set(0, 55);
 
-    DynamicArray<Integer> test_three = test.append(test_two);
+    // DynamicArray<Integer> test_three = test.append(test_two);
 
-    test.add(3, 88);
-    test.add(4, 97);
+    // test.add(3, 88);
+    // test.add(4, 97);
 
-    DynamicArray<Integer> test_four = test.splitSuffix(1);
-    System.out.println(test_four.get(0));
-    System.out.println(test_four.get(1));
-    System.out.println(test_four.get(2));
-    System.out.println(test_four.get(3));
+    // DynamicArray<Integer> test_four = test.splitSuffix(1);
+    // System.out.println(test_four.get(0));
+    // System.out.println(test_four.get(1));
+    // System.out.println(test_four.get(2));
+    // System.out.println(test_four.get(3));
+
+    test.set(0, 44);
+    test.set(1, 67);
+    test.set(2, 9999);
+    test.set(3, -1);
+    test.set(4, 2);
+
+    test.print();
+
+    DynamicArray<Integer> result = test.delete(1, 3);
+    System.out.println();
+    result.print();
 }
 
 }

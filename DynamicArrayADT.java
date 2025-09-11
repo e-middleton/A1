@@ -69,13 +69,13 @@ public interface DynamicArrayADT<T>{
      */
     public DynamicArrayADT<T> splitSuffix(int index);
 
-    // /**
-    //  * Method for separating out the elements before, but not including, a specified index,
-    //  * and returning those elements as a separate DynamicArray.
-    //  * @param index the index where all the elements before it are separated out into the new DynamicArray.
-    //  * @return The new DynamicArray made up of the separated out elements.
-    //  */
-    // public DynamicArrayADT<T> splitPrefix(int index);
+    /**
+     * Method for separating out the elements before, but not including, a specified index,
+     * and returning those elements as a separate DynamicArray.
+     * @param index the index where all the elements before it are separated out into the new DynamicArray.
+     * @return The new DynamicArray made up of the separated out elements.
+     */
+    public DynamicArrayADT<T> splitPrefix(int index);
 
     // /**
     //  * Method for removing multiple elements from, and including, a given index, up until
@@ -84,7 +84,7 @@ public interface DynamicArrayADT<T>{
     //  * element is also included in the section being removed.
     //  * @param end_index the ending index of the section of elements being removed. The element stored 
     //  * at this index is not removed from the original DynamicArray.
-    //  * @return the elements that have been removed in a separate DynamicArray object.
+    //  * @return the DynamicArray object without the removed elements.
     //  */
     // public DynamicArrayADT<T> delete(int start_index, int end_index);
 
