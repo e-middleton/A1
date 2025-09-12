@@ -82,7 +82,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param val the value being stored at the newly created element.
      */
     public void add(int index, T val){
-    
+        
         if(index<0 || index>this.size){
             throw new IndexOutOfBoundsException("Invalid Index");
         }

@@ -16,41 +16,41 @@ __PART__ 1 pt: Method call signatures correctly implement interface
 
 _____ 1 pt: Appropriate instance variables defined for `DynamicArray`
 
-_____ 1 pt: Group 1 method fully tested: get
+__PART__ 1 pt: Group 1 method fully tested: get
 
-_____ 1 pt: Group 1 methods correctly implemented 
+__PART__ 1 pt: Group 1 methods correctly implemented 
 
-_____ 1 pt: Group 2 method fully tested: add
+__PART__ 1 pt: Group 2 method fully tested: add
 
-_____ 1 pt: Group 2 methods correctly implemented
+__PART__ 1 pt: Group 2 methods correctly implemented
 
-_____ 1 pts: Group 3 methods fully tested: append and extract
+__PART__ 1 pts: Group 3 methods fully tested: append and extract
 
-_____ 1 pts: Group 3 methods correctly implemented
+__PART__ 1 pts: Group 3 methods correctly implemented
 
-_____ 1 pt: Methods call other methods as needed to reduce redundancy
+__NO__ 1 pt: Methods call other methods as needed to reduce redundancy
 
-_____ KUDOS: Group 4 methods implemented
+__NO__ KUDOS: Group 4 methods implemented
 
 
 ## General Items:
 
-_____ 4 pts: Programs compile without errors or warnings 
+__YES__ 4 pts: Programs compile without errors or warnings 
 
-_____ 2 pts: Executes fully & consistently without crashing (exceptions/freezing)
+__YES__ 2 pts: Executes fully & consistently without crashing (exceptions/freezing)
 
-_____ 2 pt: Complies with style guidelines:
+__PART__ 2 pt: Complies with style guidelines:
 
-      _____ Classes & class members all have Javadoc header comments 
+      __PART__ Classes & class members all have Javadoc header comments 
 
-      _____ Clear and consistent indentation of bracketed sections 
+      __YES__ Clear and consistent indentation of bracketed sections 
 
-      _____ Adheres to Java conventions on naming & capitalization 
+      __YES__ Adheres to Java conventions on naming & capitalization 
 
-      _____ Methods & variables all have clear and accurate names 
+      __YES__ Methods & variables all have clear and accurate names 
 
-      _____ Methods avoid confusing side effects  
+      __YES__ Methods avoid confusing side effects  
 
-_____ 1 pt: All required files included with submission (including basic readme info and completed checklist file) 
+__NO__ 1 pt: All required files included with submission (including basic readme info and completed checklist file) 
 
-_____ 1 pt: README.md contains collaboration acknowledgment and your reflection on the assignment 
+__NO__ 1 pt: README.md contains collaboration acknowledgment and your reflection on the assignment 
