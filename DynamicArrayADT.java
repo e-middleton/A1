@@ -14,8 +14,9 @@ public interface DynamicArrayADT<T>{
      * Method to set an element at a specified index in the DynamicArray.
      * @param index the index of the element being set
      * @param val the value being stored in the specified index.
+     * @return the value previously stored in that element, which could be null.
      */
-    public void set(int index, T val);
+    public T set(int index, T val);
 
     /**
      * Method to get or access a value stored in a specified element.

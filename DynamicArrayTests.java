@@ -1,5 +1,5 @@
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
 public class DynamicArrayTests {
@@ -28,7 +28,7 @@ public class DynamicArrayTests {
     public DynamicArray<Character> stringToArray(String s) {
         DynamicArray<Character> result = new DynamicArray<Character>(s.length());
         for (int i = 0; i < s.length(); i++) {
-            result.add(i, s.charAt(i));
+            result.set(i, s.charAt(i));
         }
         return result;
     }
@@ -97,37 +97,40 @@ public class DynamicArrayTests {
 
     // ~*~*~*~*~ Add Extract Tests Below ~*~*~*~*~
 
-//    /**
-//     * Tests that ...
-//     */
-//    @Test
-//    public void testExtractStandard() {
-//        // fill in standard cases
-//    }
-//
-//    /**
-//     * Tests that ..
-//     */
-//    @Test
-//    public void testExtractEntire() {
-//        // fill in extracting the entire array
-//    }
-//
-//    /**
-//     * Tests that ..
-//     */
-//    @Test
-//    public void testExtractZero() {
-//        // fill in extracting zero elements
-//    }
-//
-//    /**
-//     * Tests that ..
-//     */
-//    @Test
-//    public void testExtractEmpty() {
-//        // fill in extracting from an empty array
-//    }
+   /**
+    * Tests that for a nonempty DynamicArray, extracting elements [1, 3) selects
+    * elements 1 and 2 and returns them as a separate DynamicArray.
+    */
+   @Test
+   public void testExtractStandard() {
+       compareToString(a1.extract(1, 3), "bc");
+   }
+
+   /**
+    * Tests that for a non-empty array, extracting indicies 0 to size() extracts
+    * the entire array.
+    */
+   @Test
+   public void testExtractEntire() {
+       compareToString(a1.extract(0, a1.size()), "abcdef");
+   }
+
+   /**
+    * Tests that extracting using matching indicies, such as (0,0) will extract no elements,
+    * and an empty array will be returned
+    */
+   @Test
+   public void testExtractZero() {
+       compareToString(a1.extract(0,0), "");
+   }
+
+   /**
+    * Tests that extracting from an empty array will return an empty array.
+    */
+   @Test
+   public void testExtractEmpty() {
+       compareToString(empty.extract(0,0), "");
+   }
 
     /**
      * Tests that extract throws the proper exception
@@ -137,16 +140,127 @@ public class DynamicArrayTests {
     public void testExtractBounds() {
         DynamicArray<Character> extract = a1.extract(-1, 5);
         // More bounds that you can check:
-        // low index is negative => throws ArrayIndexOutOfBoundsException
-        // high index is greater than array length => throws ArrayIndexOutOfBoundsException
-        // low index is greater than array length => throws ArrayIndexOutOfBoundsException
-        // high index is negative => throws ArrayIndexOutOfBoundsException
-        // high index is less than low
+        DynamicArray<Character> extract1 = a1.extract(-3, 2); // low index is negative
+        DynamicArray<Character> extract2 = a1.extract(2, 14); // high index is greater than array length
+        DynamicArray<Character> extract3 = a1.extract(14, 14); // low index is greater than array length
+        DynamicArray<Character> extract4 = a1.extract(3, -3); // high index is negative
+        DynamicArray<Character> extract5 = a1.extract(3, 1); // high index is less than low
     }
 
-    // ~*~*~*~*~ Write More Tests Below ~*~*~*~*~
+    // ~*~*~*~*~ Add Add() Tests Below ~*~*~*~*~
 
-    // write tests for the other methods here
+    /**
+     * Tests that when add is called for a given index, 
+     * a new element is added with that value and the other elements shift right
+     */
+    @Test
+    public void testAddStandard() {
+        Character addition = 'm';
+        a1.add(2, addition);
+        compareToString(a1, "abmcdef");
+    }
+
+    /**
+     * Tests that adding an element at the index size() adds an element to the very end of the array.
+     */
+    @Test
+    public void testAddEnd() {
+        Character addition = 'g';
+        a1.add(a1.size(), addition);
+        compareToString(a1, "abcdefg");
+    }
+
+    /**
+     * Tests that adding an element at index 0 adds it to the very beginning of the array.
+     */
+    @Test
+    public void testAddStart() {
+        Character addition = 'm';
+        a1.add(0, addition);
+        compareToString(a1, "mabcdef");
+    }
+
+    /**
+     * Tests that it is possible to add elements to an empty array.
+     */
+    @Test
+    public void testAddEmpty() {
+        Character letter = 'm';
+        empty.add(0, letter);
+        compareToString(empty, "m");
+
+    }
+
+    /**
+     * Tests that invalid indicies throw the expected IndexOutOfBoundsException
+     */
+    @Test(expected = IndexOutOfBoundsException.class) 
+    public void testAddBounds(){
+        Character letter = 'm';
+        a1.add(-1, letter); // negative index
+        a1.add(a1.size()+1, letter); // index greater than the length of the array
+    }
+
+    // ~*~*~*~*~Tests For Get Below ~*~*~*~*~
+
+    /** 
+     * Tests that accessing an element at an index returns the value stored there in a non-empty array
+     */
+    @Test 
+    public void testGetStandard() {
+        Character result = a1.get(1);
+        Character expected = 'b';
+        assertEquals("Characters should be equal" , result, expected);
+    }
+
+    /**
+     * Tests that getting the very last element of an array (size - 1) returns the correct value.
+     */
+    @Test
+    public void testGetEnd() {
+        Character result = a1.get(a1.size()-1);
+        Character expected = 'f';
+        assertEquals("Characters should be equal" , result, expected);
+    }
+
+    /**
+     * Tests that getting the first element returns the correct value.
+     */
+    @Test
+    public void testGetStart() {
+        Character result = a1.get(0);
+        Character expected = 'a';
+        assertEquals("Characters should be equal" , result, expected);
+    }
+
+    /**
+     * Tests that getting the element of a single element array returns the correct element
+     */
+    @Test
+    public void testGetSingle(){
+        Character result = s.get(0);
+        Character expected = 's';
+        assertEquals("Characters should be equal" , result, expected);
+    }
+
+
+    /**
+     * Tests that trying to get elements at negative indicies or indicies greater than the length throw the 
+     * IndexOutOfBoundsException
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetBounds() {
+        a1.get(-1); // negative index
+        a1.get(44); // index greater than length
+    }
+
+    /**
+     * Tests that trying to get an element from an empty array throws an IndexOutOfBoundsException
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetEmpty() {
+        empty.get(0);
+    }
 }
 
 

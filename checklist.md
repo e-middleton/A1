@@ -10,9 +10,9 @@ your work, please indicate the status of each item
 
 Assignment Points (out of 20):
 
-_____ 1 pt: Interface includes all specified methods
+__PART__ 1 pt: Interface includes all specified methods
 
-_____ 1 pt: Method call signatures correctly implement interface
+__PART__ 1 pt: Method call signatures correctly implement interface
 
 _____ 1 pt: Appropriate instance variables defined for `DynamicArray`
 
