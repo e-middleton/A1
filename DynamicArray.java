@@ -53,19 +53,19 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         return (T[]) new Object[len];
     }
     
-    // BUILT IN FUNCTIONALITY FOR ARRAY //
+    // GROUP ONE METHODS: BUILT IN FUNCTIONALITY FOR ARRAY //
 
     /**
      * Method to set an element at a specified index in the DynamicArray.
-     * If the index is out of the valid range, from 0 until one less than size(), 
-     * this method will throw an IndexOutOfBoundsException.
+     * If the index is out of the valid range, [0, size), 
+     * this method will throw an ArrayIndexOutOfBoundsException.
      * @param index the index of the element being set
      * @param val the value being stored in the specified index.
      * @return the value previously stored in that element, which could be null.
      */
     public T set(int index, T val){
         if(index<0 || index>=this.size){
-            throw new IndexOutOfBoundsException("Invalid index");
+            throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
         T previousVal = this.values[index];
         this.values[index] = val;
@@ -75,13 +75,13 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     /**
      * Method to get or access a value stored in a specified element.
      * If the index is outside of the valid range of indicies, from zero until one less than size(),
-     * this method will throw an IndexOutOfBoundsException
+     * this method will throw an ArrayIndexOutOfBoundsException
      * @param index the index of the element being accessed.
      * @return the value stored in the specified element.
      */
     public T get(int index){
         if(index<0 || index>=this.size){
-            throw new IndexOutOfBoundsException("Invalid Index");
+            throw new ArrayIndexOutOfBoundsException("Invalid Index");
         }
         return this.values[index];
     }
@@ -102,14 +102,14 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * The valid range includes 0 to the size() of the DynamicArray.
      * For example, if a DynamicArray object had a length of 3, the valid indicies 
      * would include 0 through 3.
-     * If the index is outside of that range, it will throw an IndexOutOfBoundsException
+     * If the index is outside of that range, it will throw an ArrayIndexOutOfBoundsException
      * @param index The index where the new element is being inserted.
      * @param val the value being stored at the newly created element.
      */
     public void add(int index, T val){
         
         if(index<0 || index>this.size){
-            throw new IndexOutOfBoundsException("Invalid Index");
+            throw new ArrayIndexOutOfBoundsException("Invalid Index");
         }
 
         T[] newValues = allocate(this.size + 1); // new array with an added element
@@ -130,13 +130,13 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * Method to remove an element from the DynamicArray object.
      * If the index specified is beyond the valid range for the DynamicArray, 
      * which is 0 until one less than size(),
-     * it will throw an IndexOutOfBoundsException.
+     * it will throw an ArrayIndexOutOfBoundsException.
      * @param index the index of the element being removed
      * @return returns the value that was stored in the removed index
      */
     public T remove(int index){
         if(index < 0 || index>= this.size){
-            throw new IndexOutOfBoundsException("Invalid index");
+            throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
 
         T[] newValues = allocate(this.size-1);
@@ -197,7 +197,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     /**
      * Method for removing multiple elements from, and including, a given index, up until
-     * just before a second index.
+     * just before a second index. If the index is outside of the valid range, [0, size), it will 
+     * throw an ArrayIndexOutOfBoundsException.
      * @param startIndex the starting index of the section being removed from the DynamicArray, this 
      * element is also included in the section being removed.
      * @param endIndex the ending index of the section of elements being removed. The element stored 
@@ -206,13 +207,13 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public DynamicArray<T> delete(int startIndex, int endIndex){
         if(startIndex<0 || startIndex>=this.size){
-            throw new IndexOutOfBoundsException("The starting index is invalid");
+            throw new ArrayIndexOutOfBoundsException("The starting index is invalid");
         }
         if(endIndex<0 || endIndex>this.size){
-            throw new IndexOutOfBoundsException("The ending index is invalid");
+            throw new ArrayIndexOutOfBoundsException("The ending index is invalid");
         }
         if(endIndex<=startIndex){
-            throw new RuntimeException("the starting index must be less than the ending index");
+            throw new ArrayIndexOutOfBoundsException("the starting index must be less than the ending index");
         }
 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size - (endIndex-startIndex));
@@ -247,24 +248,24 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     /**
      * Method for taking a 'clipping' from a DynamicArray starting at a given index and ending at another.
      * If the starting and ending indicies are beyond the valid range of the Dynamic Array, which is from one until size(),
-     * it will throw an IndexOutOfBoundsException.
+     * it will throw an ArrayIndexOutOfBoundsException.
      * @param startIndex the beginning of the extract, this index will be included in the resulting DynamicArray
      * @param endIndex the ending index of the extract, the element at this index is not included in the result.
      * @return a new DynamicArray of the 'clipped' elements.
      */
     public DynamicArray<T> extract(int startIndex, int endIndex){
         if(startIndex<0 || startIndex> this.size){
-            throw new IndexOutOfBoundsException("Invalid starting index");
+            throw new ArrayIndexOutOfBoundsException("Invalid starting index");
         }
         if(endIndex<0 || endIndex> this.size){
-            throw new IndexOutOfBoundsException("Invalid ending index");
+            throw new ArrayIndexOutOfBoundsException("Invalid ending index");
         }
         if(endIndex==startIndex){ // no elements will be extracted (?)
             DynamicArray<T> extractArr = new DynamicArray<T>(0);
             return extractArr;
         }
         if(endIndex<startIndex){
-            throw new IndexOutOfBoundsException("The starting index must be lower than the ending index");
+            throw new ArrayIndexOutOfBoundsException("The starting index must be lower than the ending index");
         }
 
         DynamicArray<T> extractArr = new DynamicArray<T>(endIndex-startIndex);
@@ -289,7 +290,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     /**
      * Method for inserting multiple elements of a DynamicArray into this DynamicArray at
      * a specified index. If that index is outside of the valid range, from zero until size(), it
-     * will throw a new IndexOutOfBoundsException.
+     * will throw a new ArrayIndexOutOfBoundsException.
      * @param index the index where the new elements will be inserted.
      * @param newArray the DynamicArray being inserted into this DynamicArray.
      * @return a new object of type DynamicArray which is the old DynamicArray with the new 
@@ -297,7 +298,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public DynamicArray<T> insert(int index, DynamicArrayADT<T> newArray){
         if(index<0 || index>this.size){
-            throw new IndexOutOfBoundsException("Invalid index");
+            throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size+(newArray.size()));
@@ -322,7 +323,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 m+=1;
             }
         }
-
         return resultArr;
     }
 

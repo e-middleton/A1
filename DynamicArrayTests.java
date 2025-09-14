@@ -139,7 +139,7 @@ public class DynamicArrayTests {
      * Tests that extract throws the proper exception
      * when called on invalid indices
      */
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testExtractBounds() {
         DynamicArray<Character> extract = a1.extract(-1, 5);
         // More bounds that you can check:
@@ -154,13 +154,18 @@ public class DynamicArrayTests {
 
     /**
      * Tests that when add is called for a given index, 
-     * a new element is added with that value and the other elements shift right
+     * a new element is added with that value and the other elements shift right.
+     * Also tests that the size of the DynamicArray object is updated to be one greater.
      */
     @Test
     public void testAddStandard() {
         Character addition = 'm';
+        int prevSize = a1.size();
+
         a1.add(2, addition);
         compareToString(a1, "abmcdef");
+        assertEquals(a1.size(), prevSize+1);
+        
     }
 
     /**
@@ -195,9 +200,9 @@ public class DynamicArrayTests {
     }
 
     /**
-     * Tests that invalid indicies throw the expected IndexOutOfBoundsException
+     * Tests that invalid indicies throw the expected ArrayIndexOutOfBoundsException
      */
-    @Test(expected = IndexOutOfBoundsException.class) 
+    @Test(expected = ArrayIndexOutOfBoundsException.class) 
     public void testAddBounds(){
         Character letter = 'm';
         a1.add(-1, letter); // negative index
@@ -249,18 +254,18 @@ public class DynamicArrayTests {
 
     /**
      * Tests that trying to get elements at negative indicies or indicies greater than the length throw the 
-     * IndexOutOfBoundsException
+     * ArrayIndexOutOfBoundsException
      */
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testGetBounds() {
         a1.get(-1); // negative index
         a1.get(44); // index greater than length
     }
 
     /**
-     * Tests that trying to get an element from an empty array throws an IndexOutOfBoundsException
+     * Tests that trying to get an element from an empty array throws an ArrayIndexOutOfBoundsException
      */
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testGetEmpty() {
         empty.get(0);
     }
