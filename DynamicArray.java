@@ -1,22 +1,39 @@
 /**
- * implementation of the DynamicArrayADT which mimics the functionality of an ArrayList in java
- * 
- * TODO : FINISH DESCRIPTION
+ * Implementation of the DynamicArrayADT which mimics the functionality of an ArrayList in java.
+ * The object allocates memory for a set number of elements, with the ability to set and get their values
+ * as well as access the size/length of the object.
+ * In addition to this, there is the option to add and remove elements themselves from the object.
+ * These objects can be appended with other objects of the same type, as well as split into 
+ * two using a given index as the splitting point. Other DynamicArrays can be inserted at a given index,
+ * and sections of multiple elements can be removed using a start and end index. A selection of 
+ * elements can also be specified and extracted as a separate DynamicArray object.
  */
 public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     private int size;
     private T[] values;
 
+    /**
+     * Constructor for the DynamicArray class.
+     * @param length an int that specifies the number of elements the object can store values in.
+     */
     public DynamicArray(int length){
         this.size = length;
         this.values = allocate(length);
     }
 
-    /* TODO 
-     * It is also a good idea to write a copy constructor that takes a `DynamicArray` 
-     * as its input and makes a deep copy of it, allocating new array storage and looping to copy all the values.
+    /**
+     * constructor for the DynamicArray class that makes a deep copy of the array passed as an argument
+     * @param arr the DynamicArray being copied into the new DynamicArray
      */
+    public DynamicArray(DynamicArray<T> arr) {
+        this.size = arr.size();
+        this.values = allocate(arr.size());
+
+        for(int i = 0; i<arr.size(); i++){
+            this.values[i] = arr.get(i);
+        }
+    }
 
     /**
      * private method to allocate space for an array of generic type
@@ -140,21 +157,9 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     public DynamicArray<T> append(DynamicArrayADT<T> new_array){
         // you can return your specific class, but you have to be able to input anything implementing the interface 
         // resulting array is the length of both the inputs
-        DynamicArray<T> end_array = new DynamicArray<T>(this.size + new_array.size()); 
+        DynamicArray<T> result_array = this.insert(this.size(), new_array);
 
-        // add the elements of this current DynamicArray to the resulting array
-        for(int i = 0; i < this.size; i++){
-            T val = this.values[i];
-            end_array.set(i, val);
-        }
-
-        // add the elements of the array being concatenated to the resulting array
-        for(int j = 0; j < new_array.size(); j++){
-            T val = new_array.get(j);
-            end_array.set(this.size+j, val);
-        }
-
-        return end_array; // result is retured without modifying either input
+        return result_array; // result is retured without modifying either input
     }
 
     /**
@@ -165,13 +170,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public DynamicArray<T> splitSuffix(int index){
 
-        DynamicArray<T> suffix_array = new DynamicArray<T>(this.size - index); 
-        // new length is shorter by whatever the index is
-
-        for(int i = 0; i < this.size-index; i++){
-            T val = this.values[index+i];
-            suffix_array.set(i, val);
-        }
+        DynamicArray<T> suffix_array = this.extract(index, this.size());
 
         return suffix_array;
     }
@@ -183,15 +182,9 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     //  * @return The new DynamicArray made up of the separated out elements.
     //  */
     public DynamicArray<T> splitPrefix(int index){
-        DynamicArray<T> prefixArray = new DynamicArray<T>(this.size);
-
-        for(int i = 0; i<index; i++){
-            T item = this.values[i];
-            prefixArray.set(i, item);
-        }
+        DynamicArray<T> prefixArray = this.extract(0, index);
 
         return prefixArray; 
-
     }
 
     /**
@@ -231,7 +224,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 // do nothing to skip elements being removed
             }
         }
-
         return result_arr;
     }
 
@@ -246,8 +238,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     /**
      * Method for taking a 'clipping' from a DynamicArray starting at a given index and ending at another.
-     * If the starting and ending indicies are beyond the valid range of the Dynamic Array, which is from one until size()
-     * for the ending index and zero until size()-1 for the starting index, it will throw an IndexOutOfBoundsException.
+     * If the starting and ending indicies are beyond the valid range of the Dynamic Array, which is from one until size(),
+     * it will throw an IndexOutOfBoundsException.
      * @param start_index the beginning of the extract, this index will be included in the resulting DynamicArray
      * @param end_index the ending index of the extract, the element at this index is not included in the result.
      * @return a new DynamicArray of the 'clipped' elements.
