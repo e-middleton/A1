@@ -6,6 +6,7 @@
  * the size of the DynamicArray, as well as functional methods such as sticking two DynamicArrays together,
  * and deleting and inserting multiple elements at once, taking an exerpt from the DynamicArray,
  * and splitting the DynamicArray before or after a specified index.
+ * @param <T> the type of the class implementing DynamicArrayADT must be specified when an instance is declared.
  */
 public interface DynamicArrayADT<T>{
 

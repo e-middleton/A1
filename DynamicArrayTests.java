@@ -2,6 +2,9 @@ import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
 
+/**
+ * Class to test all the methods and behavior of DynamicArray class which implements DynamicArrayADT.
+ */
 public class DynamicArrayTests {
 
     private DynamicArray<Character> a1;
