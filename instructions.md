@@ -8,7 +8,7 @@ Your `DynamicArray` should be designed in an object-oriented style: whenever the
 
 You are expected to test your class thoroughly to ensure that all methods work correctly, including proper behavior when invalid indices are given (e.g., throwing exceptions).
 
-As an application, you will then use your `DynamicArray` class to build a simple file-editing program that can replace text in a file.
+Next week, you will then use your `DynamicArray` class to build a simple file-editing program that can replace text in a file.
 (This is inspired by the Unix command sed, which performs stream editing. Your program will be a simplified version.)
 
 ## DynamicArrayADT
@@ -21,9 +21,9 @@ Your interface should include the operations listed below:
 The methods in Group 1 are the same ones you described in your Interface for A0. They each have an equivalent method in class `ArrayList`.
 
 * `set` should update the value stored at the given index and return the previous value (which will be `null` if it was previously unset). 
-It should throw `IndexOutOfBoundsException` for invalid indices.
+It should throw `ArrayIndexOutOfBoundsException` for invalid indices.
 
-* `get` should return the element stored at an index. It should also throw `IndexOutOfBoundsException` for invalid indices.
+* `get` should return the element stored at an index. It should also throw `ArrayIndexOutOfBoundsException` for invalid indices.
 
 * `size` should return the number of elements stored in the `DynamicArray`.
 
@@ -32,12 +32,12 @@ It should throw `IndexOutOfBoundsException` for invalid indices.
 The methods in this group modify the array size by one element at a time.  These are mutating methods because they change the state of the object they are called upon.   They each have an equivalent method in class `ArrayList`.
 
 * `add` should insert an element at a provided index and shift any subsequent elements to the right.
-It should throw `IndexOutOfBoundsException` for invalid indices.
+It should throw `ArrayIndexOutOfBoundsException` for invalid indices.
 Valid indices will are between 0 and size() -- adding at index `size` is the same as appending.
 You may want to overload this method for append (special case), where only the value to be added is passed, as is done in class `ArrayList`.
 
 * `remove` removes and returns the element at an index, then shifts the subsequent elements to the left.
-It should throw `IndexOutOfBoundsException` for invalid indices (which are different from `add`).
+It should throw `ArrayIndexOutOfBoundsException` for invalid indices (which are different from `add`).
 
 ### Group 3 — Whole-Array Operations
 
@@ -47,7 +47,9 @@ The methods in this group are for combining and splitting whole arrays.  As desc
 
 * `insert` inserts all the elements of a passed `DynamicArray` at the specified index, returning the result as a new `DynamicArray`.
 
-* `sublist` returns a view (i.e., copy) of the current `DynamicArray` in the range [fromIndex, toIndex).
+* `splitSuffix` returns the elements from a specified index and after as a new `DynamicArray`.
+ 
+* `splitPrefix` returns the elements before a specified index as a new `DynamicArray`.
 
 * `delete` removes the elements spanning from the first index up to just before the other, i.e., [fromIndex, toIndex), in the current array. It then returns the resulting `DynamicArray`.
 
@@ -100,7 +102,9 @@ Tips:
 ### Testing
 
 Good testing makes the implementation much easier, because it helps you to identify and solve bugs in your code.
-As you write your code (or even before!), you should create a set of tests to check that your methods work properly.  To keep this assignment at a reasonable length, this week we are only requiring formal tests for four methods:  *get*, *add*, *append*, and *extract*.  (Note that our tests will still check the implementations of all of your methods.)
+As you write your code (or even before!), you should create a set of tests to check that your methods work properly.
+To keep this assignment at a reasonable length, this week we are only requiring formal tests for four methods:  *get*, *add*, *append*, and *extract*.  (Note that our tests will still check the implementations of all of your methods.)
+We have provided you with example tests for *append*.
 
 To simplify grading, we request that you write a class called `DynamicArrayTest` that contains JUnit tests for each of your methods.  We have provided a starter file, which you should flesh out further.
 (Note: the exception to the "no packages" rule is that you should import `Junit` for testing.)
@@ -114,7 +118,7 @@ To compile and run your tests from the command line:
 MacOS / Linux:
 ```
 javac -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar *.java
-java -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar FriendlyRunner
+java -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar RunTests
 ```
 
 Windows (PowerShell or CMD):

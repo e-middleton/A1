@@ -21,4 +21,3 @@ One thing that I completely forgot about until I looked at the checklist was try
 I can just call the other methods instead of writing more loops.
 I should definitely read the checklist earlier, but this time, I had already written implementations of the methods before
 the checklist was released so it was a bit of an odd case out.
-

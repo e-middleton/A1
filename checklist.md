@@ -10,25 +10,25 @@ your work, please indicate the status of each item
 
 Assignment Points (out of 20):
 
-__PART__ 1 pt: Interface includes all specified methods
+__YES__ 1 pt: Interface includes all specified methods
 
-__PART__ 1 pt: Method call signatures correctly implement interface
+__YES__ 1 pt: Method call signatures correctly implement interface
 
-_____ 1 pt: Appropriate instance variables defined for `DynamicArray`
+__YES__ 1 pt: Appropriate instance variables defined for `DynamicArray`
 
 __PART__ 1 pt: Group 1 method fully tested: get
 
-__PART__ 1 pt: Group 1 methods correctly implemented 
+__YES__ 1 pt: Group 1 methods correctly implemented 
 
 __PART__ 1 pt: Group 2 method fully tested: add
 
-__PART__ 1 pt: Group 2 methods correctly implemented
+__YES__ 1 pt: Group 2 methods correctly implemented
 
 __PART__ 1 pts: Group 3 methods fully tested: append and extract
 
-__PART__ 1 pts: Group 3 methods correctly implemented
+__YES__ 1 pts: Group 3 methods correctly implemented
 
-__NO__ 1 pt: Methods call other methods as needed to reduce redundancy
+__PART__ 1 pt: Methods call other methods as needed to reduce redundancy
 
 __NO__ KUDOS: Group 4 methods implemented
 
@@ -39,9 +39,9 @@ __YES__ 4 pts: Programs compile without errors or warnings
 
 __YES__ 2 pts: Executes fully & consistently without crashing (exceptions/freezing)
 
-__PART__ 2 pt: Complies with style guidelines:
+__YES__ 2 pt: Complies with style guidelines:
 
-      __PART__ Classes & class members all have Javadoc header comments 
+      __YES__ Classes & class members all have Javadoc header comments 
 
       __YES__ Clear and consistent indentation of bracketed sections 
 
@@ -51,6 +51,6 @@ __PART__ 2 pt: Complies with style guidelines:
 
       __YES__ Methods avoid confusing side effects  
 
-__NO__ 1 pt: All required files included with submission (including basic readme info and completed checklist file) 
+__YES__ 1 pt: All required files included with submission (including basic readme info and completed checklist file) 
 
-__NO__ 1 pt: README.md contains collaboration acknowledgment and your reflection on the assignment 
+__YES__ 1 pt: README.md contains collaboration acknowledgment and your reflection on the assignment 

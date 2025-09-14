@@ -11,44 +11,49 @@
 public interface DynamicArrayADT<T>{
 
     // basic array behavior
+    
     /**
-     * Method to set an element at a specified index in the DynamicArray.
+     * Method to set an element at a specified index in the object implementing DynamicArrayADT.
+     * If the index is out of the valid range, [0, size) 
+     * this method will throw an ArrayIndexOutOfBoundsException.
      * @param index the index of the element being set
      * @param val the value being stored in the specified index.
-     * @return the value previously stored in that element, which could be null.
+     * @return the value previously stored in that element, which could be null if it was previously unset.
      */
     public T set(int index, T val);
 
     /**
-     * Method to get or access a value stored in a specified element.
+     * Method to access a value stored in a specified index.
+     * If the index is outside of the valid range of indicies, [0, size),
+     * this method will throw an ArrayIndexOutOfBoundsException
      * @param index the index of the element being accessed.
      * @return the value stored in the specified element.
      */
     public T get(int index);
 
-    /**
-     * Method to return the length of the DynamicArray.
-     * @return the length or size of the DynamicArray
+   /**
+     * Method for returning the number of elements stored in an object implementing DynamicArrayADT.
+     * @return the length, or number of objects stored, of the object implementing DynamicArrayADT.
      */
     public int size();
 
     // mutable methods (modify the old DynamicArray)
 
     /**
-     * Method to add an element to the DynamicArray object. 
-     * An index must be within the valid range for the DynamicArray object. 
-     * The valid range includes the first element, until one beyond the last pre-existing element.
-     * For example, if a DynamicArray object had a length of 3, the valid indicies 
-     * would include 0 through 3.
+     * Method to add an element to the object implementing DynamicArrayADT. 
+     * An index must be within the valid range for the DynamicArrayADT object. 
+     * The valid range includes 0 until, and including, the size of the DynamicArrayADT.
+     * If the index is outside of that range, it will throw an ArrayIndexOutOfBoundsException
      * @param index The index where the new element is being inserted.
      * @param val the value being stored at the newly created element.
      */
     public void add(int index, T val);
 
     /**
-     * Method to remove an element from the DynamicArray object.
-     * If the index specified is beyond the valid range for the DynamicArray, 
-     * it will throw a RuntimeException
+     * Method to remove an element from the DynamicArrayADT object.
+     * If the index specified is beyond the valid range for the DynamicArrayADT, 
+     * which is 0 until one less than the size of the DynamicArrayADT object,
+     * it will throw an ArrayIndexOutOfBoundsException.
      * @param index the index of the element being removed
      * @return returns the value that was stored in the removed index
      */
@@ -57,55 +62,67 @@ public interface DynamicArrayADT<T>{
     // Functional methods (return the new DynamicArray) ///
 
     /**
-     * Method to concatenate another DynamicArray onto this object.
-     * @param new_array The DynamicArray being concatenated onto this object
-     * @return this DynamicArray concatenated with the new DynamicArray as a single object of type DynamicArray
+     * Method to concatenate another DynamicArrayADT object onto the end of the current DynamicArrayADT object,
+     * where the result is returned as a new DynamicArrayADT object.
+     * @param newArray The DynamicArrayADT being concatenated onto the end of this current object
+     * @return a new DynamicArrayADT which is the result of concatenating a new DynamicArrayADT onto the end of this current DynamicArrayADT.
      */
-    public DynamicArrayADT<T> append(DynamicArrayADT<T> new_array); 
+    public DynamicArrayADT<T> append(DynamicArrayADT<T> newArray); 
 
     /**
-     * Method for returning the elements after and including the specified index as a new DynamicArray.
-     * If the specified index is beyond size of the DynamicArray, it will throw a RuntimeException.
-     * @param index the index where the split begins, and this index is included in the new DynamicArray.
-     * @return A new DynamicArray object of all the elements after and including the specified index.
+     * Method for inserting multiple elements of a new DynamicArrayADT into this current DynamicArrayADT at
+     * a specified index. The result is returned as a new DynamicArrayADT object. 
+     * If the index is outside of the valid range, from zero until the size of the current DynamicArrayADT, it
+     * will throw an ArrayIndexOutOfBoundsException.
+     * @param index the index where the new elements will be inserted. The valid range is from zero until the size of the current DynamicArrayADT.
+     * @param newArray the DynamicArrayADT being inserted into this current DynamicArrayADT.
+     * @return a new object of type DynamicArrayADT which is the current DynamicArrayADT with the new 
+     * elements inserted.
+     */
+    public DynamicArrayADT<T> insert(int index, DynamicArrayADT<T> newArray);
+
+    /**
+     * Method for returning the elements from a specified index and after as a new DynamicArrayADT object.
+     * If the specified index is beyond size of the DynamicArrayADT, it will throw a ArrayIndexOutOfBounds exception.
+     * @param index the index where the split begins, and this index is included in the new DynamicArray. The index must be from 0 to the size of the DynamicArrayADT.
+     * @return A new DynamicArrayADT object of all the elements after and including the specified index.
      */
     public DynamicArrayADT<T> splitSuffix(int index);
 
     /**
      * Method for separating out the elements before, but not including, a specified index,
-     * and returning those elements as a separate DynamicArray.
-     * @param index the index where all the elements before it are separated out into the new DynamicArray.
-     * @return The new DynamicArray made up of the separated out elements.
+     * and returning those elements as a new DynamicArrayADT.
+     * If the index is zero, it will throw an ArrayIndexOutOfBoundsException, because there are no
+     * elements to access before the index zero, and it will throw an ArrayIndexOutOfBoundsException
+     * if the index is greater than the size of the array. Range is from (0, size).
+     * @param index the index where all the elements before it are separated out into the new DynamicArrayADT.
+     * @return The new DynamicArrayADT made up of the separated out elements.
      */
     public DynamicArrayADT<T> splitPrefix(int index);
 
     /**
      * Method for removing multiple elements from, and including, a given index, up until
-     * just before a second index.
-     * @param start_index the starting index of the section being removed from the DynamicArray, this 
+     * just before the second index in the current DynamicArrayADT. If the index is outside of the valid range, from zero 
+     * until the size of the DynamicArrayADT, it will 
+     * throw an ArrayIndexOutOfBoundsException.
+     * The current DynamicArrayADT object is not modified, and the array with the elements removed is returned as a new DynamicArrayADT.
+     * @param startIndex the starting index of the section being removed from the DynamicArrayADT, this 
      * element is also included in the section being removed.
-     * @param end_index the ending index of the section of elements being removed. The element stored 
-     * at this index is not removed from the original DynamicArray.
-     * @return the DynamicArray object without the removed elements.
+     * @param endIndex the ending index of the section of elements being removed. The element stored 
+     * at this index is not removed and is included in the resulting DynamicArrayADT.
+     * @return A new DynamicArrayADT object where elements from startIndex until just before endIndex have been removed from the current DynamicArrayADT.
      */
-    public DynamicArrayADT<T> delete(int start_index, int end_index);
+    public DynamicArrayADT<T> delete(int startIndex, int endIndex);
 
     /**
-     * Method for taking a 'clipping' from a DynamicArray starting at a given index and ending at another.
-     * @param start_index the beginning of the extract, this index will be included in the resulting DynamicArray
-     * @param end_index the ending index of the extract, the element at this index is not included in the result.
-     * @return a new DynamicArray of the 'clipped' elements.
+     * Method for taking an extract from a DynamicArrayADT starting at a given index and ending just before an ending index.
+     * The result is returned as a new DynamicArrayADT and the current DynamicArrayADT remains unaltered.
+     * If the starting and ending indicies are beyond the valid range of the DynamicArrayADT, which is from 0 until the size of the DynamicArrayADT,
+     * it will throw an ArrayIndexOutOfBoundsException.
+     * @param startIndex the beginning of the extract, this index will be included in the resulting DynamicArrayADT
+     * @param endIndex the ending index of the extract, the element at this index is not included in the resulting DynamicArrayADT.
+     * @return a new DynamicArrayADT consisting of the elements from startIndex until just before endIndex.
      */
-    public DynamicArrayADT<T> extract(int start_index, int end_index);
-
-    /**
-     * Method for inserting multiple elements of a DynamicArray into this DynamicArray at
-     * a specified index. 
-     * @param index the index where the new elements will be inserted.
-     * @param new_array the DynamicArray being inserted into this DynamicArray.
-     * @return a new object of type DynamicArray which is the old DynamicArray with the new 
-     * elements inserted.
-     */
-    public DynamicArrayADT<T> insert(int index, DynamicArrayADT<T> new_array);
+    public DynamicArrayADT<T> extract(int startIndex, int endIndex);
 
 }
