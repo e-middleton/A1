@@ -130,6 +130,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         this.size = this.size + 1; // capacity has been increased by one element
     }
 
+    /**
+     * Overloaded add method that appends the new value onto the end of the current DynamicArray.
+     * @param val the value being appended onto the DynamicArray.
+     */
     public void add(T val){
         int index = this.size(); // append the value onto the end
         if(this.size() == this.size) {
