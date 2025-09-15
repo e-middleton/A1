@@ -382,12 +382,4 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             System.out.println(values[i]);
         }
     }
-
-    public static void main(String[] args) {
-        DynamicArray<Character> test = new DynamicArray<Character>(3);
-        test.add('a');
-        test.add('b');
-        test.add('c');
-        System.out.println(test);
-    }
 }
