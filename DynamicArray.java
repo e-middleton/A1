@@ -35,7 +35,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param arr the DynamicArray being copied into the new DynamicArray
      */
     public DynamicArray(DynamicArray<T> arr) {
-        this.values = allocate(arr.size());
+        this.values = this.allocate(arr.size());
         this.size = arr.size();
 
         for(int i = 0; i < arr.size(); i++){
@@ -102,8 +102,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     /**
      * Method to add an element to the DynamicArray object. 
-     * An index must be within the valid range for the DynamicArray object. 
-     * The valid range includes 0 until, and including, the size of the DynamicArray.
+     * An index must be within the valid range for the DynamicArray object, 
+     * which includes [0, size]
      * If the index is outside of that range, it will throw an IndexOutOfBoundsException
      * @param index The index where the new element is being inserted.
      * @param val the value being stored at the newly created element.
@@ -141,10 +141,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     }
 
     /**
-     * Overloaded add method that appends the new value onto the end of the current DynamicArray.
+     * Overloaded append method that appends the new value onto the end of the current DynamicArray.
      * @param val the value being appended onto the DynamicArray.
      */
-    public void add(T val){
+    public void append(T val){
         int index = this.size; // append the value onto the end
         if(index == this.values.length) {
             T[] newValues = this.allocate(index+1); // array one element larger
@@ -169,7 +169,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-        T[] newValues = allocate(this.size-1);
+        T[] newValues = this.allocate(this.size-1);
         T removedElem = this.values[index];  // store the element being removed so it can be returned
 
         int m = 0;
@@ -227,15 +227,15 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i <= this.size; i++) {
             if (i < index) {                     // items before the inserted segment
                 T item = this.values[i];
-                resultArr.add(item);
+                resultArr.append(item);
             } else if (i == index) {
                 for (int j = 0; j < newArray.size(); j++) { // items within the inserted segment 
                     T item = newArray.get(j);
-                    resultArr.add(item);
+                    resultArr.append(item);
                 }
             } else if (i > index) {                 // items after the insertion
                 T item = this.values[i-1]; // subtract one to compensate for skipping adding an original value last loop
-                resultArr.add(item);
+                resultArr.append(item);
             }
         }
         return resultArr;
@@ -306,10 +306,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i < numVals; i++) {
             if (i < startIndex) {
                 T item = this.values[i];
-                resultArr.add(item);
+                resultArr.append(item);
             } else if (i >= endIndex) {
                 T item = this.values[i];
-                resultArr.add(item);
+                resultArr.append(item);
             } else {
                 continue; // do nothing to skip elements being removed
             }
@@ -350,7 +350,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 continue; // do nothing to the elements after the clipping
             } else { // items contained within the range of [startIndex, endIndex)
                 T item = this.values[i];
-                extractArr.add(item);
+                extractArr.append(item);
             }
         }
         return extractArr; 

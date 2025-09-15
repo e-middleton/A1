@@ -251,7 +251,6 @@ public class DynamicArrayTests {
         assertEquals("Characters should be equal" , result, expected);
     }
 
-
     /**
      * Tests that trying to get elements at negative indicies or indicies greater than the length throw the 
      * IndexOutOfBoundsException
