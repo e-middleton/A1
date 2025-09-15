@@ -177,7 +177,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
         // appending a DynamicArray is the same thing as inserting a DynamicArray 
         // beyond the last element of the current DynamicArray 
-        DynamicArray<T> resultArray = this.insert(this.size, newArray);
+        DynamicArray<T> resultArray = this.insert(this.size(), newArray);
 
         return resultArray; // result is retured without modifying either input
     }
@@ -193,7 +193,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * elements inserted.
      */
     public DynamicArray<T> insert(int index, DynamicArrayADT<T> newArray){
-        if (index < 0 || index > this.size) {
+        if (index < 0 || index > this.size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
