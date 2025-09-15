@@ -81,7 +81,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the value stored in the specified element.
      */
     public T get(int index){
-        if (index < 0 || index > this.size){
+        if (index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException("Invalid Index");
         }
         return this.values[index];
@@ -228,7 +228,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return A new DynamicArray object of all the elements after and including the specified index.
      */
     public DynamicArray<T> splitSuffix(int index){
-        if (index < 0 || index >= this.size()) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
 
@@ -241,14 +241,12 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     /**
      * Method for separating out the elements before, but not including, a specified index,
      * and returning those elements as a new DynamicArray.
-     * If the index is zero, it will throw an IndexOutOfBoundsException, because there are no
-     * elements to access before the index zero, and it will throw an IndexOutOfBoundsException
-     * if the index is greater than the size of the array. Range is from (0, size).
+     * It will throw an IndexOutOfBoundsException if the index is greater than the size of the array. Range is from [0, size).
      * @param index the index where all the elements before it are separated out into the new DynamicArray.
      * @return The new DynamicArray made up of the separated out elements.
      */
     public DynamicArray<T> splitPrefix(int index){
-        if (index <= 0 || index > this.size()) {
+        if (index < 0 || index > this.size()) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
 
@@ -268,17 +266,18 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return A new DynamicArray object where elements from startIndex until just before endIndex have been removed from the current DynamicArray.
      */
     public DynamicArray<T> delete(int startIndex, int endIndex){
-        if (startIndex < 0 || startIndex >= this.size()) {
+        if (startIndex < 0 || startIndex >= this.size) {
             throw new IndexOutOfBoundsException("The starting index is invalid");
         }
-        if (endIndex < 0 || endIndex > this.size()) {
+        if (endIndex < 0 || endIndex > this.size) {
             throw new IndexOutOfBoundsException("The ending index is invalid");
         }
         if (endIndex < startIndex) { 
             throw new IndexOutOfBoundsException("the starting index must be less than the ending index");
         }
         if (endIndex == startIndex) {
-            return this; 
+            DynamicArray<T> result = new DynamicArray<T>(this); // make a copy of the current array
+            return result; 
         }
 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size - (endIndex-startIndex));
