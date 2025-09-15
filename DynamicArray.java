@@ -348,14 +348,4 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             System.out.println(values[i]);
         }
     }
-
-    public static void main(String[] args) {
-        DynamicArray<Character> test = new DynamicArray<Character>(3);
-        Character letter = 'a';
-        test.set(0, letter);
-        Character letter2 = 'b';
-        test.set(1, letter2);
-        Character letter3 = 'c';
-        test.set(2, letter3);
-    }
 }
