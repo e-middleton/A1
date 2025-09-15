@@ -140,7 +140,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return returns the value that was stored in the removed index
      */
     public T remove(int index){
-        if (index < 0 || index >= this.size) {
+        if (index < 0 || index >= this.size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
@@ -268,10 +268,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return A new DynamicArray object where elements from startIndex until just before endIndex have been removed from the current DynamicArray.
      */
     public DynamicArray<T> delete(int startIndex, int endIndex){
-        if (startIndex < 0 || startIndex >= this.size) {
+        if (startIndex < 0 || startIndex >= this.size()) {
             throw new IndexOutOfBoundsException("The starting index is invalid");
         }
-        if (endIndex < 0 || endIndex > this.size) {
+        if (endIndex < 0 || endIndex > this.size()) {
             throw new IndexOutOfBoundsException("The ending index is invalid");
         }
         if (endIndex < startIndex) { 
