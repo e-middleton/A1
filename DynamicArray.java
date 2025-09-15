@@ -198,7 +198,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
 
         // contains space for the elements of this current DynamicArray and the elements of the inserted DynamicArray 
-        DynamicArray<T> resultArr = new DynamicArray<T>(this.size() + newArray.size());
+        DynamicArray<T> resultArr = new DynamicArray<T>(this.size + newArray.size());
 
         int m = 0;
         for (int i = 0; i <= this.size; i++) {
@@ -347,5 +347,15 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i < this.size; i++) {
             System.out.println(values[i]);
         }
+    }
+
+    public static void main(String[] args) {
+        DynamicArray<Character> test = new DynamicArray<Character>(3);
+        Character letter = 'a';
+        test.set(0, letter);
+        Character letter2 = 'b';
+        test.set(1, letter2);
+        Character letter3 = 'c';
+        test.set(2, letter3);
     }
 }
