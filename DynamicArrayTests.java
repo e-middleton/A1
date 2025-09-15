@@ -164,8 +164,7 @@ public class DynamicArrayTests {
 
         a1.add(2, addition);
         compareToString(a1, "abmcdef");
-        assertEquals(a1.size(), prevSize+1);
-        
+        assertEquals(a1.size(), prevSize+1); 
     }
 
     /**

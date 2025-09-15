@@ -1,8 +1,8 @@
 /**
  * Implementation of the DynamicArrayADT which mimics the functionality of an ArrayList in java.
  * Though some methods in group 3 are functional in DynamicArrays and not functional in ArrayList.
- * The object allocates memory for a set number of elements, with the ability to set and get their values
- * as well as access the size/length of the object.
+ * The object allocates memory for a set number of elements, with the ability to set, and get their values
+ * as well as access the size of the object.
  * In addition to this, there is the option to add and remove elements themselves from the object.
  * These objects can be appended with other objects of the same type, as well as split into 
  * two using a given index as the splitting point. Other DynamicArrays can be inserted at a given index,
