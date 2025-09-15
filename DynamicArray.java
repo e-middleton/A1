@@ -233,7 +233,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
 
         DynamicArray<T> suffixArray = this.extract(index, this.size); 
-        // beginning index included in extract, ending index not included, so it's one beyond the size of the array
+        // beginning index included in extract, ending index not included, so it's one beyond the indicies of the array
 
         return suffixArray; 
     }
@@ -241,12 +241,12 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     /**
      * Method for separating out the elements before, but not including, a specified index,
      * and returning those elements as a new DynamicArray.
-     * It will throw an IndexOutOfBoundsException if the index is greater than the size of the array. Range is from [0, size).
+     * It will throw an IndexOutOfBoundsException if the index is greater than the size of the array. Range is from (0, size].
      * @param index the index where all the elements before it are separated out into the new DynamicArray.
      * @return The new DynamicArray made up of the separated out elements.
      */
     public DynamicArray<T> splitPrefix(int index){
-        if (index < 0 || index >= this.size) {
+        if (index <= 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
 
