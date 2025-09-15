@@ -30,3 +30,6 @@ different methods can complement each other or work together, instead of looking
 I realized I completely misunderstood how set(int index, T val) was supposed to work. I had previously thought I could add a value anywhere
 as long as the index was within the capacity initially declared/the size of the internal array. But when I ran it through the autograder, I 
 realized that I needed to add those elements before they could be set, and then I had to rewrite a large portion of the code. 
+
+I'm really not sure that I've written my methods correctly, and I feel like I have a lot of loops in different places
+that make me a little worried that I'm not being very efficient with memory.
