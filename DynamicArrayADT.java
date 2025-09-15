@@ -125,4 +125,10 @@ public interface DynamicArrayADT<T>{
      */
     public DynamicArrayADT<T> extract(int startIndex, int endIndex);
 
+    /**
+     * Method to turn the object implementing the DynamicArrayADT into a String representation
+     * @return the String representation of the object implementing the DynamicArrayADT.
+     */
+    public String toString();
+
 }
