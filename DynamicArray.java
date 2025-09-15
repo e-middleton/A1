@@ -13,7 +13,7 @@
 public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     /**
-     * The size of the DynamicArray
+     * The size of the DynamicArray, how many elements are currently filled in
      */
     private int size;
     /**
@@ -26,7 +26,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param length an int that specifies the number of elements the object can store values in.
      */
     public DynamicArray(int length){
-        this.size = length;
+        this.size = 0;
         this.values = allocate(length);
     }
 
@@ -70,6 +70,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
         T previousVal = this.values[index];
         this.values[index] = val;
+        this.size += 1;
         return previousVal;
     }
 
