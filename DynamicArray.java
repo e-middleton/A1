@@ -149,7 +149,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         int index = this.size; // append the value onto the end
         if(index == this.values.length) {
             T[] newValues = allocate(index+1); // array one element larger
-            for (int i = 0; i < index; i ++){
+            for (int i = 0; i < index; i++) { // copy over the old elements
                 newValues[i] = this.values[i];
             }
             this.values = newValues;
@@ -170,7 +170,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-
         T[] newValues = allocate(this.size-1);
         T removedElem = this.values[index];  // store the element being removed so it can be returned
 
@@ -183,7 +182,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 m+=1;
             }
         }
-
         this.values = newValues; // array without the removed elem is now the storage for this object
         this.size -= 1;
         return removedElem;
@@ -357,6 +355,18 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             }
         }
         return extractArr; 
+    }
+
+    /**
+     * Method to convert the DynamicArray into a String object.
+     */
+    public String toString(){
+        String result = "";
+        for(int i = 0; i < this.size; i++){
+            String elem = this.values[i].toString();
+            result.concat(elem);
+        }
+        return result;
     }
 
     /**
