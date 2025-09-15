@@ -374,12 +374,4 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
 
     }
-    public static void main(String[] args) {
-        DynamicArray<Integer> test = new DynamicArray<Integer>(3);
-        test.add(1);
-        test.set(0, 3);
-        test.add(2);
-        test.set(2, 1);
-        test.print();
-    }
 }
