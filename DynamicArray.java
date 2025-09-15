@@ -65,7 +65,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the value previously stored in that element, which could be null if it was previously unset.
      */
     public T set(int index, T val){
-        if (index < 0 || index >= this.size-1){
+        if (index < 0 || index >= this.size){
             throw new IndexOutOfBoundsException("Invalid index");
         }
         T previousVal = this.values[index];
