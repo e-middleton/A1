@@ -22,12 +22,18 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     private T[] values;
 
     /**
+     * the number of elements set in the array
+     */
+    private int size;
+
+    /**
      * Constructor for the DynamicArray class.
      * @param size an int that specifies the number of elements the object can store values in.
      */
     public DynamicArray(int size){
         this.capacity = size;
         this.values = allocate(size);
+        this.size = 0;
     }
 
     /**
@@ -37,6 +43,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     public DynamicArray(DynamicArray<T> arr) {
         this.capacity = arr.size();
         this.values = allocate(arr.size());
+        this.size = 0;
 
         for(int i = 0; i < arr.size(); i++){
             this.values[i] = arr.get(i);
@@ -93,7 +100,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public int size(){
         int length = 0;
-        for (int i = 0; i < this.values.length; i++) {
+        for (int i = 0; i < this.capacity; i++) {
             if (this.values[i] != null){
                 length += 1;
             }
@@ -148,6 +155,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         // if more space does not need to be allocated
         
         this.capacity = this.capacity + 1; // capacity has been increased by one element
+        this.size += 1;
     }
 
     /**
@@ -166,6 +174,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             this.values = newValues;
         }
         this.values[index] = val;
+        this.size += 1;
     }
 
     /**
@@ -197,6 +206,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
         this.values = newValues; // array without the removed elem is now the storage for this object
         this.capacity = this.capacity - 1; // update the size of this object to match removed element
+        this.size -= 1;
         return removedElem;
     }
 
