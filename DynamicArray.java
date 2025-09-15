@@ -226,7 +226,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         // contains space for the elements of this current DynamicArray and the elements of the inserted DynamicArray 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size + newArray.size());
 
-        for (int i = 0; i < this.size; i++) {
+        for (int i = 0; i <= this.size; i++) {
             if (i < index) {                     // items before the inserted segment
                 T item = this.values[i];
                 resultArr.add(item);
@@ -369,5 +369,19 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             System.out.println(values[i]);
         }
 
+    }
+       public static void main(String[] args) {
+        DynamicArray<Character> test = new DynamicArray<Character>(3);
+        test.add('a');
+        test.add('b');
+        test.add('c');
+        test.add('d');
+        test.add('e');
+        DynamicArray<Character> test2 = new DynamicArray<Character>(3);
+        test2.add('x');
+        test2.add('y');
+        DynamicArray<Character> test3 = test.append(test2);
+        test3.print();
+        System.out.println(test3.size());
     }
 }
