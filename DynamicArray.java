@@ -13,7 +13,7 @@
 public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     /**
-     * The size of the DynamicArray, how many elements are currently filled in
+     * The maximum size of the DynamicArray.
      */
     private int size;
     /**
@@ -26,7 +26,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param length an int that specifies the number of elements the object can store values in.
      */
     public DynamicArray(int length){
-        this.size = 0;
+        this.size = length;
         this.values = allocate(length);
     }
 
@@ -70,7 +70,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
         T previousVal = this.values[index];
         this.values[index] = val;
-        this.size += 1;
         return previousVal;
     }
 
@@ -90,10 +89,16 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
     /**
      * Method for returning the number of elements stored in a DynamicArray object.
-     * @return the length, or number of objects stored, of the DynamicArray object
+     * @return the length, or number of objects currently stored in the DynamicArray object
      */
     public int size(){
-        return this.size;
+        int length = 0;
+        for (int i = 0; i < this.values.length; i++) {
+            if (this.values[i] != null){
+                length += 1;
+            }
+        }
+        return length;
     }
 
     // GROUP 2 : MUTABLE METHODS // 
