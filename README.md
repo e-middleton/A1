@@ -7,7 +7,8 @@ Any references or resources used besides JavaDoc and course materials:
 Reflection on your experience with this assignment:
 
 
-I didn't work with anybody else for this assignment. I did attend office hours.
+I didn't work with anybody else for this assignment, I talked to Hanyu (That might not be her name) during
+office hours, but I just explained why I added loops and we didn't write code together. I did attend office hours.
 I did not use any materials other than class notes and Javadoc.
 
 
