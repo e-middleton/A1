@@ -130,6 +130,18 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         this.size = this.size + 1; // capacity has been increased by one element
     }
 
+    public void add(T val){
+        int index = this.size(); // append the value onto the end
+        if(this.size() == this.size) {
+            T[] newValues = allocate(this.size()+1); // array one element larger
+            for (int i = 0; i < this.size(); i ++){
+                newValues[i] = this.values[i];
+            }
+            this.values = newValues;
+        }
+        this.values[index] = val;
+    }
+
     /**
      * Method to remove an element from the DynamicArray object.
      * If the index specified is beyond the valid range for the DynamicArray, 
@@ -199,22 +211,19 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         // contains space for the elements of this current DynamicArray and the elements of the inserted DynamicArray 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size + newArray.size());
 
-        int m = 0;
         for (int i = 0; i <= this.size; i++) {
             if (i < index) {                     // items before the inserted segment
                 T item = this.values[i];
-                resultArr.set(m, item);
-                m+=1;
+                resultArr.add(item);
+     
             } else if (i == index) {
                 for (int j = 0; j < newArray.size(); j++) { // items within the inserted segment 
                     T item = newArray.get(j);
-                    resultArr.set(m, item);
-                    m+=1;
+                    resultArr.add(item);
                 }
             } else if (i > index) {                 // items after the insertion
                 T item = this.values[i-1]; // subtract one to compensate for skipping adding an original value last loop
-                resultArr.set(m, item);
-                m+=1;
+                resultArr.add(item);
             }
         }
         return resultArr;
@@ -281,16 +290,13 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size - (endIndex-startIndex));
 
-        int m = 0; //separate iterating var for shorter result arr
         for (int i = 0; i < this.size; i++) {
             if (i < startIndex) {
                 T item = this.values[i];
-                resultArr.set(m, item);
-                m+=1;
+                resultArr.add(item);
             } else if (i >= endIndex) {
                 T item = this.values[i];
-                resultArr.set(m, item);
-                m+=1;
+                resultArr.add(item);
             } else {
                 continue; // do nothing to skip elements being removed
             }
@@ -324,7 +330,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
         DynamicArray<T> extractArr = new DynamicArray<T>(endIndex-startIndex);
 
-        int m = 0; //counter for shorter arr
         for (int i = 0; i < this.size; i++) {
             if (i < startIndex) {
                 continue; // do nothing to the elements before the clipping
@@ -332,8 +337,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 continue; // do nothing to the elements after the clipping
             } else { // items contained within the range of [startIndex, endIndex)
                 T item = this.values[i];
-                extractArr.set(m, item);
-                m+=1;
+                extractArr.add(item);
             }
         }
         return extractArr; 
@@ -346,5 +350,12 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i < this.size; i++) {
             System.out.println(values[i]);
         }
+    }
+
+    public static void main(String[] args) {
+        DynamicArray<Integer> test = new DynamicArray<Integer>(3);
+        test.add(1);
+        test.set(2, 2);
+        test.print();
     }
 }
