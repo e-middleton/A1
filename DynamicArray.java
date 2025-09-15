@@ -145,12 +145,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param val the value being appended onto the DynamicArray.
      */
     public void add(T val){
-        int numVals = this.size();
-
-        int index = numVals; // append the value onto the end
-        if(numVals == this.values.length) {
-            T[] newValues = allocate(numVals+1); // array one element larger
-            for (int i = 0; i < numVals; i ++){
+        int index = this.size; // append the value onto the end
+        if(index == this.values.length) {
+            T[] newValues = allocate(index+1); // array one element larger
+            for (int i = 0; i < index; i ++){
                 newValues[i] = this.values[i];
             }
             this.values = newValues;
@@ -168,16 +166,15 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return returns the value that was stored in the removed index
      */
     public T remove(int index){
-        int numVals = this.size();
-        if (index < 0 || index >= numVals) {
+        if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
-        T[] newValues = allocate(numVals-1);
+        T[] newValues = allocate(this.size-1);
         T removedElem = this.values[index];  // store the element being removed so it can be returned
 
         int m = 0;
-        for (int i = 0; i < numVals; i++) {
+        for (int i = 0; i < this.size; i++) {
             if (i == index) {
                 continue; // do nothing so the counter increments and skips the removed element
             } else {
@@ -229,7 +226,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         // contains space for the elements of this current DynamicArray and the elements of the inserted DynamicArray 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size + newArray.size());
 
-        for (int i = 0; i <= this.size; i++) {
+        for (int i = 0; i < this.size; i++) {
             if (i < index) {                     // items before the inserted segment
                 T item = this.values[i];
                 resultArr.add(item);
@@ -254,12 +251,11 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return A new DynamicArray object of all the elements after and including the specified index.
      */
     public DynamicArray<T> splitSuffix(int index){
-        int numVals = this.size();
-        if (index < 0 || index > numVals) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
 
-        DynamicArray<T> suffixArray = this.extract(index, numVals); 
+        DynamicArray<T> suffixArray = this.extract(index, this.size); 
         // beginning index included in extract, ending index not included, so it's one beyond the indicies of the array
 
         return suffixArray; 
