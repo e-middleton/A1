@@ -28,7 +28,7 @@ __YES__ 1 pts: Group 3 methods fully tested: append and extract
 
 __YES__ 1 pts: Group 3 methods correctly implemented
 
-__PART__ 1 pt: Methods call other methods as needed to reduce redundancy
+__YES__ 1 pt: Methods call other methods as needed to reduce redundancy
 
 __NO__ KUDOS: Group 4 methods implemented
 

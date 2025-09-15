@@ -27,6 +27,8 @@ public class DynamicArrayTests {
 
     /**
      * Puts the characters of a string into an array structure
+     * @param s the string being turned into an array
+     * @return the string object converted into an array
      */
     public DynamicArray<Character> stringToArray(String s) {
         DynamicArray<Character> result = new DynamicArray<Character>(s.length());
