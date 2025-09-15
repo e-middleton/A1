@@ -228,7 +228,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return A new DynamicArray object of all the elements after and including the specified index.
      */
     public DynamicArray<T> splitSuffix(int index){
-        if (index < 0 || index >= this.size) {
+        if (index < 0 || index >= this.size()) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
 
@@ -248,7 +248,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return The new DynamicArray made up of the separated out elements.
      */
     public DynamicArray<T> splitPrefix(int index){
-        if (index <= 0 || index > this.size) {
+        if (index <= 0 || index > this.size()) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
 
