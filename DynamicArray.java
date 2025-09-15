@@ -112,32 +112,22 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
-                            
-        if (this.size == this.values.length) {                // if more space needs to be allocated
-            T[] newValues = this.allocate(this.values.length + 1); // new array with an added element
-            int m = 0;
-            for (int i = 0; i <= this.size; i++){
-                if(i == index){
-                    newValues[i] = val;
-                } else {
-                    newValues[i] = this.values[m];
-                    m+=1;
-                }
-            }
-            this.values = newValues;
-        } else {                                    // if more space does not need to be allocated
-            T[] temp = this.values.clone();
-            int m = 0;
-            for (int i = 0; i <= this.size; i++){
-                if(i == index){
-                    this.values[i] = val;
-                } else {
-                    this.values[i] = temp[m];
-                    m+=1;
-                }
+        if (index == this.size) { // appending
+            this.append(val);
+            return;
+        }
+        T[] newValues = this.allocate(this.size + 1); // new array with an added element
+        int m = 0;
+        for (int i = 0; i <= this.size; i++){
+            if(i == index){
+                newValues[i] = val;
+            } else {
+                newValues[i] = this.values[m];
+                m+=1;
             }
         }
         this.size += 1;
+        this.values = newValues;
     }
 
     /**
