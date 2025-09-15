@@ -114,7 +114,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
                             
         if (this.size == this.values.length) {                // if more space needs to be allocated
-            T[] newValues = allocate(this.values.length + 1); // new array with an added element
+            T[] newValues = this.allocate(this.values.length + 1); // new array with an added element
             int m = 0;
             for (int i = 0; i <= this.size; i++){
                 if(i == index){
@@ -147,7 +147,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     public void add(T val){
         int index = this.size; // append the value onto the end
         if(index == this.values.length) {
-            T[] newValues = allocate(index+1); // array one element larger
+            T[] newValues = this.allocate(index+1); // array one element larger
             for (int i = 0; i < index; i++) { // copy over the old elements
                 newValues[i] = this.values[i];
             }
@@ -366,7 +366,9 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             result = result.concat(elem);
             result = result.concat(", ");
         }
-        result = result.substring(0, result.length()-2);
+        if (this.size > 0){
+            result = result.substring(0, result.length()-2); // get rid of the last whitespace and comma
+        }
         result = result.concat("]");
         return result;
     }
@@ -379,5 +381,13 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i < numVals; i++) {
             System.out.println(values[i]);
         }
+    }
+
+    public static void main(String[] args) {
+        DynamicArray<Character> test = new DynamicArray<Character>(3);
+        test.add('a');
+        test.add('b');
+        test.add('c');
+        System.out.println(test);
     }
 }
