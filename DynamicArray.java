@@ -130,8 +130,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             int m = 0;
             for (int i = 0; i <= this.size; i++){
                 if(i == index){
-                    this.values[m] = val;
-                    m+=1;
+                    this.values[i] = val;
                 } else {
                     this.values[i] = temp[m];
                     m+=1;
