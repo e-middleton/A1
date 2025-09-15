@@ -11,11 +11,6 @@
  * @param <T> the type of the DynamicArray object must be specified when a new instance is declared.
  */
 public class DynamicArray<T> implements DynamicArrayADT<T> {
-
-    /**
-     * The maximum size of the DynamicArray.
-     */
-    private int capacity;
     /**
      * the internal array that holds the elements modified and accessed by the DynamicArray object.
      */
@@ -31,9 +26,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param size an int that specifies the number of elements the object can store values in.
      */
     public DynamicArray(int size){
-        this.capacity = size;
         this.values = allocate(size);
-        this.size = 0;
+        this.size = 0; // initialized to zero because no elements have been set yet
     }
 
     /**
@@ -41,9 +35,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param arr the DynamicArray being copied into the new DynamicArray
      */
     public DynamicArray(DynamicArray<T> arr) {
-        this.capacity = arr.size();
         this.values = allocate(arr.size());
-        this.size = 0;
+        this.size = arr.size();
 
         for(int i = 0; i < arr.size(); i++){
             this.values[i] = arr.get(i);
@@ -72,8 +65,11 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the value previously stored in that element, which could be null if it was previously unset.
      */
     public T set(int index, T val){
-        if (index < 0 || index > this.size()) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
+        }
+        if (index == this.size) { // same thing as add(T val)
+            this.size += 1; 
         }
         T previousVal = this.values[index];
         this.values[index] = val;
@@ -88,7 +84,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the value stored in the specified element.
      */
     public T get(int index){
-        if (index < 0 || index >= this.size()){
+        if (index < 0 || index >= this.size){
             throw new IndexOutOfBoundsException("Invalid Index");
         }
         return this.values[index];
@@ -99,13 +95,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the length, or number of objects currently stored in the DynamicArray object
      */
     public int size(){
-        int length = 0;
-        for (int i = 0; i < this.capacity; i++) {
-            if (this.values[i] != null){
-                length += 1;
-            }
-        }
-        return length;
+        return this.size;
     }
 
     // GROUP 2 : MUTABLE METHODS // 
@@ -119,18 +109,14 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param val the value being stored at the newly created element.
      */
     public void add(int index, T val){
-        int num_vals = this.size();
-
-        if (index < 0 || index > num_vals) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
-
-        // if more space needs to be allocated
-        if(num_vals == this.capacity) {
-            T[] newValues = allocate(this.capacity + 1); // new array with an added element
-            this.capacity += 1;
+                                                    // if more space needs to be allocated
+        if(this.size == this.values.length) {
+            T[] newValues = allocate(this.values.length + 1); // new array with an added element
             int m = 0;
-            for (int i = 0; i <= num_vals; i++){
+            for (int i = 0; i <= this.size; i++){
                 if(i == index){
                     newValues[i] = val;
                 } else {
@@ -139,10 +125,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 }
             }
             this.values = newValues;
-        } else {
+        } else {                                    // if more space does not need to be allocated
             T[] temp = this.values.clone();
             int m = 0;
-            for (int i = 0; i <= num_vals; i++){
+            for (int i = 0; i <= this.size; i++){
                 if(i == index){
                     this.values[m] = val;
                     m+=1;
@@ -151,10 +137,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                 }
             }
         }
-
-        // if more space does not need to be allocated
-        
-        this.capacity = this.capacity + 1; // capacity has been increased by one element
         this.size += 1;
     }
 
@@ -166,7 +148,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         int numVals = this.size();
 
         int index = numVals; // append the value onto the end
-        if(numVals == this.capacity) {
+        if(numVals == this.values.length) {
             T[] newValues = allocate(numVals+1); // array one element larger
             for (int i = 0; i < numVals; i ++){
                 newValues[i] = this.values[i];
@@ -205,7 +187,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         }
 
         this.values = newValues; // array without the removed elem is now the storage for this object
-        this.capacity = this.capacity - 1; // update the size of this object to match removed element
         this.size -= 1;
         return removedElem;
     }
@@ -225,7 +206,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
         // appending a DynamicArray is the same thing as inserting a DynamicArray 
         // beyond the last element of the current DynamicArray 
-        DynamicArray<T> resultArray = this.insert(this.size(), newArray);
+        DynamicArray<T> resultArray = this.insert(this.size, newArray);
 
         return resultArray; // result is retured without modifying either input
     }
@@ -241,16 +222,14 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * elements inserted.
      */
     public DynamicArray<T> insert(int index, DynamicArrayADT<T> newArray){
-        int numVals = this.size();
-
-        if (index < 0 || index > numVals) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
         // contains space for the elements of this current DynamicArray and the elements of the inserted DynamicArray 
-        DynamicArray<T> resultArr = new DynamicArray<T>(numVals + newArray.size());
+        DynamicArray<T> resultArr = new DynamicArray<T>(this.size + newArray.size());
 
-        for (int i = 0; i <= numVals; i++) {
+        for (int i = 0; i <= this.size; i++) {
             if (i < index) {                     // items before the inserted segment
                 T item = this.values[i];
                 resultArr.add(item);
@@ -393,5 +372,14 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i < numVals; i++) {
             System.out.println(values[i]);
         }
+
+    }
+    public static void main(String[] args) {
+        DynamicArray<Integer> test = new DynamicArray<Integer>(3);
+        test.add(1);
+        test.set(0, 3);
+        test.add(2);
+        test.set(2, 1);
+        test.print();
     }
 }
