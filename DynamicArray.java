@@ -360,11 +360,14 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * Method to convert the DynamicArray into a String object.
      */
     public String toString(){
-        String result = "";
+        String result = "[";
         for(int i = 0; i < this.size; i++){
             String elem = this.values[i].toString();
             result = result.concat(elem);
+            result = result.concat(", ");
         }
+        result = result.substring(0, result.length()-2);
+        result = result.concat("]");
         return result;
     }
 
@@ -376,6 +379,5 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         for (int i = 0; i < numVals; i++) {
             System.out.println(values[i]);
         }
-
     }
 }
