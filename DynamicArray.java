@@ -38,7 +38,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         this.size = arr.size();
         this.values = allocate(arr.size());
 
-        for(int i = 0; i<arr.size(); i++){
+        for(int i = 0; i < arr.size(); i++){
             this.values[i] = arr.get(i);
         }
     }
@@ -65,7 +65,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the value previously stored in that element, which could be null if it was previously unset.
      */
     public T set(int index, T val){
-        if (index < 0 || index >= this.size){
+        if (index < 0 || index > this.size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         T previousVal = this.values[index];
@@ -112,7 +112,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param val the value being stored at the newly created element.
      */
     public void add(int index, T val){
-
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
@@ -128,7 +127,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             }
         }
         this.values = newValues;
-        this.size = this.size + 1; // size has been increased by one element
+        this.size = this.size + 1; // capacity has been increased by one element
     }
 
     /**
