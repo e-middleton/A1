@@ -68,7 +68,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-        if (index == this.size) { // same thing as add(T val)
+        if (index == this.size) { // same thing as append(T val)
             this.size += 1; 
         }
         T previousVal = this.values[index];
