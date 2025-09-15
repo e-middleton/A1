@@ -16,15 +16,15 @@ __YES__ 1 pt: Method call signatures correctly implement interface
 
 __YES__ 1 pt: Appropriate instance variables defined for `DynamicArray`
 
-__PART__ 1 pt: Group 1 method fully tested: get
+__YES__ 1 pt: Group 1 method fully tested: get
 
 __YES__ 1 pt: Group 1 methods correctly implemented 
 
-__PART__ 1 pt: Group 2 method fully tested: add
+__YES__ 1 pt: Group 2 method fully tested: add
 
 __YES__ 1 pt: Group 2 methods correctly implemented
 
-__PART__ 1 pts: Group 3 methods fully tested: append and extract
+__YES__ 1 pts: Group 3 methods fully tested: append and extract
 
 __YES__ 1 pts: Group 3 methods correctly implemented
 

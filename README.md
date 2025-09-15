@@ -4,12 +4,11 @@
 
 
 Any references or resources used besides JavaDoc and course materials:
-
 Reflection on your experience with this assignment:
 
 
 I didn't work with anybody else for this assignment. I did attend office hours.
-I did not use any materials other than class notes.
+I did not use any materials other than class notes and Javadoc.
 
 
 I had some trouble keeping track of everything because there were so many details in the instructions.
@@ -27,3 +26,7 @@ the checklist was released so it was a bit of an odd case out.
 
 Overall, I think my organization strategy for these assignments should be updated, and I should spend more time thinking about how 
 different methods can complement each other or work together, instead of looking at them in isolation.
+
+I realized I completely misunderstood how set(int index, T val) was supposed to work. I had previously thought I could add a value anywhere
+as long as the index was within the capacity initially declared/the size of the internal array. But when I ran it through the autograder, I 
+realized that I needed to add those elements before they could be set, and then I had to rewrite a large portion of the code. 
