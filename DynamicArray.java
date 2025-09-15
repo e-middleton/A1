@@ -193,7 +193,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * elements inserted.
      */
     public DynamicArray<T> insert(int index, DynamicArrayADT<T> newArray){
-        if (index < 0 || index > this.size) {
+        if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
