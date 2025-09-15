@@ -364,7 +364,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         String result = "";
         for(int i = 0; i < this.size; i++){
             String elem = this.values[i].toString();
-            result.concat(elem);
+            result = result.concat(elem);
         }
         return result;
     }
