@@ -15,7 +15,7 @@ public interface DynamicArrayADT<T>{
     /**
      * Method to set an element at a specified index in the object implementing DynamicArrayADT.
      * If the index is out of the valid range, [0, size) 
-     * this method will throw an ArrayIndexOutOfBoundsException.
+     * this method will throw an IndexOutOfBoundsException.
      * @param index the index of the element being set
      * @param val the value being stored in the specified index.
      * @return the value previously stored in that element, which could be null if it was previously unset.
@@ -25,7 +25,7 @@ public interface DynamicArrayADT<T>{
     /**
      * Method to access a value stored in a specified index.
      * If the index is outside of the valid range of indicies, [0, size),
-     * this method will throw an ArrayIndexOutOfBoundsException
+     * this method will throw an IndexOutOfBoundsException
      * @param index the index of the element being accessed.
      * @return the value stored in the specified element.
      */
@@ -43,7 +43,7 @@ public interface DynamicArrayADT<T>{
      * Method to add an element to the object implementing DynamicArrayADT. 
      * An index must be within the valid range for the DynamicArrayADT object. 
      * The valid range includes 0 until, and including, the size of the DynamicArrayADT.
-     * If the index is outside of that range, it will throw an ArrayIndexOutOfBoundsException
+     * If the index is outside of that range, it will throw an IndexOutOfBoundsException
      * @param index The index where the new element is being inserted.
      * @param val the value being stored at the newly created element.
      */
@@ -53,7 +53,7 @@ public interface DynamicArrayADT<T>{
      * Method to remove an element from the DynamicArrayADT object.
      * If the index specified is beyond the valid range for the DynamicArrayADT, 
      * which is 0 until one less than the size of the DynamicArrayADT object,
-     * it will throw an ArrayIndexOutOfBoundsException.
+     * it will throw an IndexOutOfBoundsException.
      * @param index the index of the element being removed
      * @return returns the value that was stored in the removed index
      */
@@ -73,7 +73,7 @@ public interface DynamicArrayADT<T>{
      * Method for inserting multiple elements of a new DynamicArrayADT into this current DynamicArrayADT at
      * a specified index. The result is returned as a new DynamicArrayADT object. 
      * If the index is outside of the valid range, from zero until the size of the current DynamicArrayADT, it
-     * will throw an ArrayIndexOutOfBoundsException.
+     * will throw an IndexOutOfBoundsException.
      * @param index the index where the new elements will be inserted. The valid range is from zero until the size of the current DynamicArrayADT.
      * @param newArray the DynamicArrayADT being inserted into this current DynamicArrayADT.
      * @return a new object of type DynamicArrayADT which is the current DynamicArrayADT with the new 
@@ -83,7 +83,7 @@ public interface DynamicArrayADT<T>{
 
     /**
      * Method for returning the elements from a specified index and after as a new DynamicArrayADT object.
-     * If the specified index is beyond size of the DynamicArrayADT, it will throw a ArrayIndexOutOfBounds exception.
+     * If the specified index is beyond size of the DynamicArrayADT, it will throw a IndexOutOfBoundsException.
      * @param index the index where the split begins, and this index is included in the new DynamicArray. The index must be from 0 to the size of the DynamicArrayADT.
      * @return A new DynamicArrayADT object of all the elements after and including the specified index.
      */
@@ -92,8 +92,8 @@ public interface DynamicArrayADT<T>{
     /**
      * Method for separating out the elements before, but not including, a specified index,
      * and returning those elements as a new DynamicArrayADT.
-     * If the index is zero, it will throw an ArrayIndexOutOfBoundsException, because there are no
-     * elements to access before the index zero, and it will throw an ArrayIndexOutOfBoundsException
+     * If the index is zero, it will throw an IndexOutOfBoundsException, because there are no
+     * elements to access before the index zero, and it will throw an IndexOutOfBoundsException
      * if the index is greater than the size of the array. Range is from (0, size).
      * @param index the index where all the elements before it are separated out into the new DynamicArrayADT.
      * @return The new DynamicArrayADT made up of the separated out elements.
@@ -104,7 +104,7 @@ public interface DynamicArrayADT<T>{
      * Method for removing multiple elements from, and including, a given index, up until
      * just before the second index in the current DynamicArrayADT. If the index is outside of the valid range, from zero 
      * until the size of the DynamicArrayADT, it will 
-     * throw an ArrayIndexOutOfBoundsException.
+     * throw an IndexOutOfBoundsException.
      * The current DynamicArrayADT object is not modified, and the array with the elements removed is returned as a new DynamicArrayADT.
      * @param startIndex the starting index of the section being removed from the DynamicArrayADT, this 
      * element is also included in the section being removed.
@@ -118,7 +118,7 @@ public interface DynamicArrayADT<T>{
      * Method for taking an extract from a DynamicArrayADT starting at a given index and ending just before an ending index.
      * The result is returned as a new DynamicArrayADT and the current DynamicArrayADT remains unaltered.
      * If the starting and ending indicies are beyond the valid range of the DynamicArrayADT, which is from 0 until the size of the DynamicArrayADT,
-     * it will throw an ArrayIndexOutOfBoundsException.
+     * it will throw an IndexOutOfBoundsException.
      * @param startIndex the beginning of the extract, this index will be included in the resulting DynamicArrayADT
      * @param endIndex the ending index of the extract, the element at this index is not included in the resulting DynamicArrayADT.
      * @return a new DynamicArrayADT consisting of the elements from startIndex until just before endIndex.

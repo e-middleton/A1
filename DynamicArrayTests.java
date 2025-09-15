@@ -139,7 +139,7 @@ public class DynamicArrayTests {
      * Tests that extract throws the proper exception
      * when called on invalid indices
      */
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testExtractBounds() {
         DynamicArray<Character> extract = a1.extract(-1, 5);
         // More bounds that you can check:
@@ -200,9 +200,9 @@ public class DynamicArrayTests {
     }
 
     /**
-     * Tests that invalid indicies throw the expected ArrayIndexOutOfBoundsException
+     * Tests that invalid indicies throw the expected IndexOutOfBoundsException
      */
-    @Test(expected = ArrayIndexOutOfBoundsException.class) 
+    @Test(expected = IndexOutOfBoundsException.class) 
     public void testAddBounds(){
         Character letter = 'm';
         a1.add(-1, letter); // negative index
@@ -254,18 +254,18 @@ public class DynamicArrayTests {
 
     /**
      * Tests that trying to get elements at negative indicies or indicies greater than the length throw the 
-     * ArrayIndexOutOfBoundsException
+     * IndexOutOfBoundsException
      */
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetBounds() {
         a1.get(-1); // negative index
         a1.get(44); // index greater than length
     }
 
     /**
-     * Tests that trying to get an element from an empty array throws an ArrayIndexOutOfBoundsException
+     * Tests that trying to get an element from an empty array throws an IndexOutOfBoundsException
      */
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetEmpty() {
         empty.get(0);
     }
