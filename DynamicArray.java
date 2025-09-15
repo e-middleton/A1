@@ -193,7 +193,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * elements inserted.
      */
     public DynamicArray<T> insert(int index, DynamicArrayADT<T> newArray){
-        if (index < 0 || index >= this.size) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
@@ -266,19 +266,19 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return A new DynamicArray object where elements from startIndex until just before endIndex have been removed from the current DynamicArray.
      */
     public DynamicArray<T> delete(int startIndex, int endIndex){
-        if (startIndex < 0 || startIndex >= this.size) {
+        if (startIndex <= 0 || startIndex >= this.size) {
             throw new IndexOutOfBoundsException("The starting index is invalid");
         }
-        if (endIndex < 0 || endIndex >= this.size) {
+        if (endIndex <= 0 || endIndex >= this.size) {
             throw new IndexOutOfBoundsException("The ending index is invalid");
         }
-        if (endIndex < startIndex) { 
+        if (endIndex <= startIndex) { 
             throw new IndexOutOfBoundsException("the starting index must be less than the ending index");
         }
-        if (endIndex == startIndex) {
-            DynamicArray<T> result = new DynamicArray<T>(this); // make a copy of the current array
-            return result; 
-        }
+        // if (endIndex == startIndex) {
+        //     DynamicArray<T> result = new DynamicArray<T>(this); // make a copy of the current array
+        //     return result; 
+        // }
 
         DynamicArray<T> resultArr = new DynamicArray<T>(this.size - (endIndex-startIndex));
 
