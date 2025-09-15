@@ -81,7 +81,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return the value stored in the specified element.
      */
     public T get(int index){
-        if (index < 0 || index >= this.size){
+        if (index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException("Invalid Index");
         }
         return this.values[index];
