@@ -112,8 +112,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
-                                                    // if more space needs to be allocated
-        if(this.size == this.values.length) {
+                            
+        if (this.size == this.values.length) {                // if more space needs to be allocated
             T[] newValues = allocate(this.values.length + 1); // new array with an added element
             int m = 0;
             for (int i = 0; i <= this.size; i++){
@@ -134,6 +134,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                     m+=1;
                 } else {
                     this.values[i] = temp[m];
+                    m+=1;
                 }
             }
         }
@@ -230,7 +231,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             if (i < index) {                     // items before the inserted segment
                 T item = this.values[i];
                 resultArr.add(item);
-     
             } else if (i == index) {
                 for (int j = 0; j < newArray.size(); j++) { // items within the inserted segment 
                     T item = newArray.get(j);
@@ -330,11 +330,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @return a new DynamicArray consisting of the elements from startIndex until just before endIndex.
      */
     public DynamicArray<T> extract(int startIndex, int endIndex){
-        int numVals = this.size();
-        if (startIndex < 0 || startIndex > numVals) {
+        if (startIndex < 0 || startIndex > this.size) {
             throw new IndexOutOfBoundsException("Invalid starting index");
         }
-        if (endIndex < 0 || endIndex > numVals) {
+        if (endIndex < 0 || endIndex > this.size) {
             throw new IndexOutOfBoundsException("Invalid ending index");
         }
         if (endIndex == startIndex) { // no elements will be extracted (?)
@@ -347,7 +346,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
 
         DynamicArray<T> extractArr = new DynamicArray<T>(endIndex-startIndex);
 
-        for (int i = 0; i < numVals; i++) {
+        for (int i = 0; i < this.size; i++) {
             if (i < startIndex) {
                 continue; // do nothing to the elements before the clipping
             } else if (i >= endIndex) {
