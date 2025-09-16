@@ -343,7 +343,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     }
 
     /**
-     * Method to convert the DynamicArray into a String object.
+     * Method to convert the DynamicArray into a String representation of the object.
      * @return a String representation of the DynamicArray object
      */
     public String toString(){
