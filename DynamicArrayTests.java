@@ -201,6 +201,18 @@ public class DynamicArrayTests {
     }
 
     /**
+     * Tests that null values can be added into DynamicArrays
+     * It allows me to add them, but it's difficult to fully
+     * check if it's been added correctly so more work would need
+     * to be done here.
+     */
+    @Test
+    public void testAddNull() {
+        Character letter = null;
+        a1.add(0, letter);
+    }
+
+    /**
      * Tests that invalid indicies throw the expected IndexOutOfBoundsException
      */
     @Test(expected = IndexOutOfBoundsException.class) 

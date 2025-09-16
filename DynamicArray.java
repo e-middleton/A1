@@ -112,6 +112,11 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("Invalid Index");
         }
+        if (index == this.size) {
+            this.append(val); // no need to reallocate space in the way done below if there is more storage and it only needs appending
+            return; 
+        }
+
         T[] newValues = this.allocate(this.size + 1); // new array with an added element
         int m = 0;
         for (int i = 0; i <= this.size; i++){
